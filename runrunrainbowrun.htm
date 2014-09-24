@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>RunRunRainbowRun v.0.1a</title>
+</head>
+
+<script src="jquery.js"></script>
+<script src="canimate.js"></script>
+<body>
+<div style="width:780px;height:780px;margin:0px auto;text-align:center;">
+<?php
+$rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
+$color1 = '#'.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
+$color2 = '#'.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
+
+echo "<h1 style='font-family:Gotham Rounded A, sans-serif;font-weight:bold;background: -webkit-linear-gradient(".$color1.", ".$color2.");-webkit-background-clip: text;-webkit-text-fill-color: transparent;'><sup>Run</sup><sub>Run</sub>Rainbow<sup><sup>Run</sup></sup><sub><sub><sub><sub><sub>BETA</sub></sub></sub></sub></sub></h1>";
+
+for($i=0;$i<=40;$i++){
+  for($z=0;$z<=40;$z++){
+    $rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
+    $color = '#'.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
+    echo "<div class='h".$i."_w".$z."' style='border:1px solid black;background-color:".$color.";width:17px;height:17px;float:left;'></div>";
+  } 
+  echo "<div style='clear:both;'></div>";
+}
+
+?>
+</div>
+<div style='clear:both;'></div>
+
+<script>
+var lastElement = null;
+highlight('h0_w0');
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+function highlight(classname){
+  var randomColor = getRandomColor();
+  $('.'+lastElement).css('background-color', randomColor);
+  //$('.'+classname).css('background-color', 'red');
+  pulsate(classname);
+  lastElement = classname;
+}
+
+function pulsate(classname){
+  for (i=0; i < 5; i++){
+    $('.'+classname).animate({ backgroundColor:getRandomColor() }, 500);
+  }
+}
+
+var h = 0;
+var w = 0;
+
+$(document).keydown(function(e) {
+    if(h<=40&&h>=0&&w<=40&&w>=0){
+      switch(e.which) {
+          case 37: // left
+            w = w-1;
+            highlight('h'+h+'_w'+w);
+          break;
+  
+          case 38: // up
+            h = h-1;
+            highlight('h'+h+'_w'+w);
+          break;
+  
+          case 39: // right
+            w = w+1;
+            highlight('h'+h+'_w'+w);
+          break;
+  
+          case 40: // down
+            h = h+1;
+            highlight('h'+h+'_w'+w);
+          break;
+  
+          default: return; // exit this handler for other keys
+      }
+      
+    console.log(h,w);
+    }else{
+      alert('you is kill');
+    }
+    e.preventDefault(); // prevent the default action (scroll / move caret)
+});
+
+</script>
+</body>
+
+</html>
