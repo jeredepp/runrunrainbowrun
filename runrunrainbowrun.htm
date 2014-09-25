@@ -5,8 +5,9 @@
 
 <script src="jquery.js"></script>
 <script src="canimate.js"></script>
+<script src="logic.js"></script>
 <body>
-<div style="width:780px;height:780px;margin:0px auto;text-align:center;">
+<div id="main" style="width:780px;height:780px;margin:0px auto;text-align:center;position:relative;">
 <?php
 $rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
 $color1 = '#'.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
@@ -26,71 +27,6 @@ for($i=0;$i<=40;$i++){
 ?>
 </div>
 <div style='clear:both;'></div>
-
-<script>
-var lastElement = null;
-highlight('h0_w0');
-
-function getRandomColor() {
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '#';
-    for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
-function highlight(classname){
-  var randomColor = getRandomColor();
-  $('.'+lastElement).css('background-color', randomColor);
-  //$('.'+classname).css('background-color', 'red');
-  pulsate(classname);
-  lastElement = classname;
-}
-
-function pulsate(classname){
-  for (i=0; i < 5; i++){
-    $('.'+classname).animate({ backgroundColor:getRandomColor() }, 500);
-  }
-}
-
-var h = 0;
-var w = 0;
-
-$(document).keydown(function(e) {
-    if(h<=40&&h>=0&&w<=40&&w>=0){
-      switch(e.which) {
-          case 37: // left
-            w = w-1;
-            highlight('h'+h+'_w'+w);
-          break;
-  
-          case 38: // up
-            h = h-1;
-            highlight('h'+h+'_w'+w);
-          break;
-  
-          case 39: // right
-            w = w+1;
-            highlight('h'+h+'_w'+w);
-          break;
-  
-          case 40: // down
-            h = h+1;
-            highlight('h'+h+'_w'+w);
-          break;
-  
-          default: return; // exit this handler for other keys
-      }
-      
-    console.log(h,w);
-    }else{
-      alert('you is kill');
-    }
-    e.preventDefault(); // prevent the default action (scroll / move caret)
-});
-
-</script>
 </body>
 
 </html>
