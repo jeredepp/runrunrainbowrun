@@ -82,7 +82,7 @@ $(document).keydown(function(e) {
       
     console.log(h,w);
     }else{
-      alert('you is kill');
+      alert('you are dead');
     }
     e.preventDefault(); // prevent the default action (scroll / move caret)
 });
