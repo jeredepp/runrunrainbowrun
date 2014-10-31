@@ -6,8 +6,12 @@
 <script src="jquery.js"></script>
 <script src="canimate.js"></script>
 <script src="logic.js"></script>
+<script src="http://localhost:1337/socket.io/socket.io.js"></script>
+
 <body>
 <div id="main" style="width:780px;height:780px;margin:0px auto;text-align:center;position:relative;">
+
+
 <?php
 $rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
 $color1 = '#'.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
@@ -25,6 +29,12 @@ for($i=0;$i<=40;$i++){
 }
 
 ?>
+
+<script>
+			// Initialise the game
+			init();
+</script>
+
 </div>
 <div style='clear:both;'></div>
 </body>

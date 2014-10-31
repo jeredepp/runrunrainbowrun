@@ -1,3 +1,19 @@
+
+function init() {
+
+   var socket = io.connect("http://localhost:1337");
+  
+   socket.emit('checkCoordinates', { x: 1111, y: 2222 });
+  
+  // alert('logic.js');
+  
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('checkCoordinates', { x: 3333, y: 4444 });
+  });
+
+}
+
 var lastElement = null;
 var timer = null;
 
@@ -31,6 +47,10 @@ function highlight(classname){
           }else{
             $('.'+classname).animate({ backgroundColor:'white' }, i);
           }
+		 
+		//Send the coordinates to Server
+		socket.emit("new player", {x: 255, y: 344});
+		  
         }else{
          clearTimeout(timer);
         //  $('#main').append('<img src="skull.png" style="width:100%;height:100%;position:absolute;left:0px;top:0px;"/>');
