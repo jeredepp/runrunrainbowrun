@@ -47,9 +47,6 @@ function highlight(classname){
           }else{
             $('.'+classname).animate({ backgroundColor:'white' }, i);
           }
-		 
-		//Send the coordinates to Server
-		socket.emit("new player", {x: 255, y: 344});
 		  
         }else{
          clearTimeout(timer);
