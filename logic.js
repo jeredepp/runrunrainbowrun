@@ -1,15 +1,12 @@
-
+ var socket;
+ 
 function init() {
 
-   var socket = io.connect("http://localhost:1337");
-  
-   socket.emit('checkCoordinates', { x: 1111, y: 2222 });
-  
-  // alert('logic.js');
+   socket = io.connect("http://localhost:1337");
   
   socket.on('news', function (data) {
     console.log(data);
-    socket.emit('checkCoordinates', { x: 3333, y: 4444 });
+    //socket.emit('checkCoordinates', { x: 3333, y: 4444 });
   });
 
 }
@@ -44,10 +41,12 @@ function highlight(classname){
           if(i%2==0){
             $('.'+classname).animate({ backgroundColor:'red' }, i);
             $('.'+classname).empty().append('<img src="skull.png" style="width:100%;height:100%;"/>');
+			
+
           }else{
             $('.'+classname).animate({ backgroundColor:'white' }, i);
           }
-		  
+		 
         }else{
          clearTimeout(timer);
         //  $('#main').append('<img src="skull.png" style="width:100%;height:100%;position:absolute;left:0px;top:0px;"/>');
@@ -77,21 +76,25 @@ $(document).keydown(function(e) {
           case 37: // left
             w = w-1;
             highlight('h'+h+'_w'+w);
+			checkCoordinates();
           break;
   
           case 38: // up
             h = h-1;
             highlight('h'+h+'_w'+w);
+			checkCoordinates();
           break;
   
           case 39: // right
             w = w+1;
             highlight('h'+h+'_w'+w);
+			checkCoordinates();
           break;
   
           case 40: // down
             h = h+1;
             highlight('h'+h+'_w'+w);
+			checkCoordinates();
           break;
   
           default: return; // exit this handler for other keys
@@ -103,3 +106,7 @@ $(document).keydown(function(e) {
     }
     e.preventDefault(); // prevent the default action (scroll / move caret)
 });
+
+function checkCoordinates(){ 		 //Check Coordinates 
+	socket.emit('checkCoordinates', { x: 123, y: 456 });
+}
